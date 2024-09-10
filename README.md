@@ -1,32 +1,59 @@
-# Symantic Spotter using LlamaIndex
+# Semantic Spotter
+## Overview
+This project implements a Q&A system that answers user queries regarding insurance policies by utilizing **LlamaIndex** and **OpenAI’s GPT-3.5-turbo**. The system retrieves relevant document sections and generates precise answers using a Retrieval-Augmented Generation (RAG) approach. To optimize performance, a caching mechanism is implemented to store answers for frequently asked questions.
 
-This project implements a **Semantic Spotter** using LlamaIndex (formerly GPT Index) and OpenAI’s GPT-3.5 model. It is designed to provide accurate responses to insurance-related queries by combining large language models with vector-based search for efficient and relevant answers.
+## Dataset Description
+The dataset comprises various insurance documents in `.pdf` and `.docx` formats, which contain information about:
+- **Policyholder details**
+- **Nominee conditions**
+- **Policy benefits and claims**
+- **Exclusions and limitations**
 
-## Table of Contents
-- [Project Overview]
-- [Key Features]
-- [Prerequisites]
-- [Installation]
-- [How to Run the Symantic Spotter]
-- [Architecture]
-- [Improvements]
-- [Challenges]
-- [Future Enhancements]
-- [License]
+These documents are used as the knowledge base for answering user queries.
 
-## Project Overview
-The Symantic Spotter provides a question-answering system for insurance policies using a combination of document retrieval and generative models. It indexes documents, retrieves relevant passages, and uses AI-powered re-ranking to improve the accuracy of responses.
+## Methodology
 
-## Key Features
-- **Document Retrieval**: Indexes and retrieves relevant insurance documents.
-- **Response Generation**: Utilizes GPT-3.5 to generate answers based on document content and external knowledge.
-- **Query Re-Ranking**: Enhances response relevance with Cohere’s re-ranking.
-- **Caching**: Stores frequent responses for quick retrieval.
-- **Customizable Prompting**: Allows custom prompt templates for better alignment of answers with document context.
+### Step 1: Data Loading and Preprocessing
+- **File Formats**: The system handles document loading using **SimpleDirectoryReader**, which processes and reads text from documents.
+- **Document Parsing**: Text is processed and split into manageable chunks for indexing and retrieval.
+  
+### Step 2: Indexing and Query Engine Setup
+- **LlamaIndex**: The parsed documents are indexed using **VectorStoreIndex** from LlamaIndex, allowing efficient retrieval of relevant document sections.
+- **Query Engine**: A query engine is created using the indexed documents, which can be queried to extract relevant information based on user inputs.
 
-## Prerequisites
-1. **Install Required Libraries**: Ensure all necessary libraries are installed. Run all cells that install dependencies and code.
-2. **Prepare Dataset**: Organize your dataset of insurance documents in the specified directory.
+### Step 3: LLM Integration (OpenAI GPT-3.5-turbo)
+- **LLM for Responses**: **OpenAI’s GPT-3.5-turbo** model is used to generate human-like answers based on the retrieved document sections. The model is invoked through the OpenAI API.
+- **Custom Prompting**: Custom prompts are provided to the language model to ensure that responses are contextual and accurate.
+  
+### Step 4: Caching with Diskcache
+- **Response Caching**: A **disk-based cache** is implemented to store the results of frequently asked questions, reducing response time for similar future queries.
 
+## Model Building and Evaluation
+
+1. **LlamaIndex Query Engine**:
+   - Used to index documents and retrieve context for queries.
+   - Ensures relevant document sections are fetched efficiently.
+
+2. **GPT-3.5-turbo Integration**:
+   - Model used to generate precise and contextually accurate answers.
+   - Custom prompt templates are utilized to refine the responses.
+
+3. **Diskcache Implementation**:
+   - Used to store answers to common queries, which boosts the system's performance.
+
+## Results and Evaluation
+
+- The system successfully answers user queries by retrieving relevant sections of insurance documents and generating accurate, context-aware responses.
+- The caching mechanism reduces response times for frequently asked questions.
+
+## Customization
+- The bot can be customized for different document types and industries by modifying the document loading and indexing steps.
+- You can adjust the top-N value in the query engine to control how many document sections are retrieved for each query.
+- The model can be fine-tuned with additional prompts to handle specific insurance terminology.
+
+## Dependencies
+- `llama-index`: For document indexing and query engine setup.
+- `openai`: For integrating the OpenAI GPT models.
+- `diskcache`: For implementing response caching.
 
 
