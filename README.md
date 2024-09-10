@@ -1,6 +1,6 @@
 # Semantic Spotter
 ## Overview
-This project implements a Q&A system that answers user queries regarding insurance policies by utilizing **LlamaIndex** and **OpenAI’s GPT-3.5-turbo**. The system retrieves relevant document sections and generates precise answers using a Retrieval-Augmented Generation (RAG) approach. To optimize performance, a caching mechanism is implemented to store answers for frequently asked questions.
+This project implements a Q&A system that answers user queries regarding insurance policies by utilizing **RAG with LlamaIndex** and **OpenAI’s GPT-3.5-turbo**. The system retrieves relevant document sections and generates precise answers using a Retrieval-Augmented Generation (RAG) approach. To optimize performance, a caching mechanism is implemented to store answers for frequently asked questions.
 
 ## Dataset Description
 The dataset comprises various insurance documents in `.pdf` and `.docx` formats, which contain information about:
@@ -45,11 +45,6 @@ These documents are used as the knowledge base for answering user queries.
 
 - The system successfully answers user queries by retrieving relevant sections of insurance documents and generating accurate, context-aware responses.
 - The caching mechanism reduces response times for frequently asked questions.
-
-## Customization
-- The bot can be customized for different document types and industries by modifying the document loading and indexing steps.
-- You can adjust the top-N value in the query engine to control how many document sections are retrieved for each query.
-- The model can be fine-tuned with additional prompts to handle specific insurance terminology.
 
 ## Dependencies
 - `llama-index`: For document indexing and query engine setup.
